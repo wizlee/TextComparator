@@ -1,0 +1,57 @@
+﻿<Window x:Class="TextComparator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TextComparator"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Margin="2"
+               HorizontalAlignment="Center" FontWeight="UltraBold" FontSize="15"
+               Content="Original Text"/>
+        <Label Grid.Row="0" Grid.Column="1" Margin="2"
+               HorizontalAlignment="Center" FontWeight="UltraBold" FontSize="15"
+               Content="Modified Text"/>
+
+        <Border Grid.Row="1" Grid.Column="0" Margin="2"
+                BorderBrush="Purple" BorderThickness="2">
+            <TextBox Text="{Binding OriginalText, Mode=TwoWay}" TextWrapping="Wrap" AcceptsReturn="True"/>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="1" Margin="2"
+                BorderBrush="Purple" BorderThickness="2">
+            <TextBox Text="{Binding ModifiedText, Mode=TwoWay}" TextWrapping="Wrap" AcceptsReturn="True"/>
+        </Border>
+
+        <Button Grid.Row="2" Grid.Column="0" 
+                HorizontalAlignment="Right" Margin="4"
+                Content="Save Differences To File">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <ei:CallMethodAction MethodName="SaveDifferences" TargetObject="{Binding }"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+        <Button Grid.Row="2" Grid.Column="1" 
+                HorizontalAlignment="Left" Margin="4"
+                Content="Save Similarities To File">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <ei:CallMethodAction MethodName="SaveSimilarities" TargetObject="{Binding }"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+    </Grid>
+</Window>
